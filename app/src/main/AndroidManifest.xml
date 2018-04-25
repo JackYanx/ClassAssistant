@@ -40,20 +40,30 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
+
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.ZRSplash">
+            android:theme="@style/Theme.ZRSplash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity" />
+
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
         <activity
             android:name=".authentication.AuthenticationActivity"
             android:theme="@style/ZRBlackTheme.Theme"
-            ></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
+
     </application>
 
 </manifest>

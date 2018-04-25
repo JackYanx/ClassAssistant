@@ -6,15 +6,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#EFEFEF"
+    android:background="@drawable/bg_loginregs"
     tools:context="com.zeromirai.classassistant.authentication.AuthenticationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.44"
-        android:orientation="horizontal"
-        android:background="@drawable/shape_temp_test"></LinearLayout>
+        android:layout_weight="0.66"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.78"
+            android:orientation="horizontal"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2.15"
+            android:paddingBottom="20dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/bg_loginregss_wh" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/frameLayout_loginregfragment"
@@ -28,9 +44,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.44"
+        android:layout_weight="0.26"
         android:orientation="horizontal"
-        android:background="@drawable/shape_temp_test"></LinearLayout>
+        ></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,10 +66,14 @@
             android:textSize="20dp"
             />
 
-        <com.zeromirai.android.view.GeometricView
-            android:id="@+id/geometricView_splitline"
-            android:layout_width="10dp"
-            android:layout_height="10dp" />
+        <View
+            android:layout_width="2dip"
+            android:layout_height="23dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#EEEFFF" />
 
         <TextView
             android:id="@+id/textView_register"

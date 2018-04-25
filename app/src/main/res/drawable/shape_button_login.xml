@@ -2,11 +2,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle" >
 
-    <solid android:color="#ffffff" />
+    <solid android:color="#49ae5f" />
     <!-- 边框 -->
     <stroke
         android:width="1dip"
-        android:color="#ffffff" />
+        android:color="#49ae5f" />
     <!-- 内填充颜色 -->
     <padding
         android:bottom="3dp"
@@ -14,6 +14,6 @@
         android:right="4dp"
         android:top="3dp" />
     <!-- 圆角 -->
-    <corners android:radius="3dp" />
+    <corners android:radius="30dp" />
 
 </shape>
