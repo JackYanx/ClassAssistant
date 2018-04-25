@@ -5,6 +5,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.zeromirai.classassistant.R;
 import com.zeromirai.classassistant.authentication.fragment.LoginFragment;
@@ -14,26 +16,112 @@ public class AuthenticationActivity extends Activity {
 
     public static final String TAG = AuthenticationActivity.class.getName();
 
+    private int fragmentStatus = 0;
+
     private FragmentManager fragmentManager = null;
     private FragmentTransaction fragmentTransaction = null;
     private LoginFragment loginFragment = null;
     private RegisterFragment registerFragment = null;
 
+    private TextView textView_login;
+    private TextView textView_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
-        //setView();
+        setView();
+        setListeners();
         //throw new RuntimeException("突然想抛个异常>_<");
     }
 
     private void setView(){
+
+        textView_login = (TextView) findViewById(R.id.textView_login);
+        textView_register = (TextView) findViewById(R.id.textView_register);
+
+        /*初始化相关Fragments*/
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        loginFragment = new LoginFragment();
-        registerFragment = new RegisterFragment();
+
+        /*添加第一个fragment并隐藏*/
+        if(null == loginFragment){
+            loginFragment = new LoginFragment();
+        }
+        if(!loginFragment.isAdded()){
+            fragmentTransaction.add(R.id.frameLayout_loginregfragment,loginFragment);
+        }
+        fragmentTransaction.hide(loginFragment);
+
+        /*添加第二个fragment并隐藏*/
+        if(null == registerFragment){
+            registerFragment = new RegisterFragment();
+        }
+        if(!registerFragment.isAdded()){
+            fragmentTransaction.add(R.id.frameLayout_loginregfragment,registerFragment);
+        }
+        fragmentTransaction.hide(registerFragment);
+
+        /*显示默认fragment*/
+        fragmentTransaction.show(loginFragment);
+        fragmentTransaction.commit();
+        fragmentStatus = 0;
     }
+
+    private void setListeners(){
+
+        textView_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"textView_login pressed");
+
+                if(fragmentStatus == 0){
+                    return;
+                }
+                fragmentStatus = 0;
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.hide(registerFragment);
+                fragmentTransaction.show(loginFragment);
+                fragmentTransaction.commit();
+
+                textView_login.setTextColor(getResources().getColor(R.color.colorActivatedText));
+                textView_register.setTextColor(getResources().getColor(R.color.colorInactivatedText));
+
+                Log.d(TAG,"change to loginFragment");
+            }
+        });
+
+        textView_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"textView_register pressed");
+
+                if(fragmentStatus == 1){
+                    return;
+                }
+                fragmentStatus = 1;
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.hide(loginFragment);
+                fragmentTransaction.show(registerFragment);
+                fragmentTransaction.commit();
+
+                textView_register.setTextColor(getResources().getColor(R.color.colorActivatedText));
+                textView_login.setTextColor(getResources().getColor(R.color.colorInactivatedText));
+
+                Log.d(TAG,"change to registerFragment");
+            }
+        });
+    }
+
+
+
+
+
+
+
+
 
     @Override
     protected void onStart(){
@@ -86,6 +174,7 @@ public class AuthenticationActivity extends Activity {
          *  通常在此方法中保存Activity的一些临时状态.
          */
     }
+
 
 
 
