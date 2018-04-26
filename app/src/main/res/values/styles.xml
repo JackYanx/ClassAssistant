@@ -8,6 +8,7 @@
     <style name="Theme.ZRSplash" parent="AppTheme">
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <!--位图资源很耗费内存,这张1080x1920图片加载后占用65MB内存资源-->
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:windowFullscreen">true</item>
     </style>
@@ -16,6 +17,15 @@
     <style name="Theme.AppStartLoadTranslucent" parent="android:Theme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ZRBlackTheme.Theme" parent="AppTheme">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ZREditText" parent="android:Theme">
+        <item name="colorControlNormal">#aaaaaa</item>
+        <item name="colorControlActivated">#ff8800</item>
     </style>
 
 </resources>
