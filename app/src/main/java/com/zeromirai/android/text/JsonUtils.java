@@ -19,12 +19,12 @@ public final class JsonUtils {
      */
     public static JSONObject optStrToJsonObject(String str){
         if(TextUtils.isEmpty(str)){
-            return null;
+            return new JSONObject();
         }
         try{
             return new JSONObject(str);
         }catch (JSONException e) {
-            return null;
+            return new JSONObject();
         }
     }
 
