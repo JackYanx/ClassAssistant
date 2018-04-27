@@ -28,18 +28,18 @@
 
             <ImageView
                 android:id="@+id/imageView_icon_userName"
-                android:layout_width="wrap_content"
+                android:layout_width="21dp"
                 android:layout_height="18dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/icon_user" />
 
             <View
-                android:layout_width="2dip"
-                android:layout_height="23dp"
+                android:layout_width="1dip"
+                android:layout_height="21dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
+                android:layout_marginRight="4dp"
                 android:background="#EEEFFF" />
 
             <EditText
@@ -51,10 +51,19 @@
                 android:background="@null"
                 android:ems="10"
                 android:hint="@string/hint_userName"
-                android:textColorHint="#AAAAAA"
                 android:inputType="textPersonName"
-                android:textColor="#333333"
+                android:textColor="@color/colorEditTextEnabled"
+                android:textColorHint="#AAAAAA"
                 android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/imageView_btn_del_userName"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_delete"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,20 +77,18 @@
 
             <ImageView
                 android:id="@+id/imageViewimageView_icon_password"
-                android:layout_width="wrap_content"
+                android:layout_width="21dp"
                 android:layout_height="18dp"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
                 android:scaleType="centerInside"
                 android:src="@drawable/icon_password" />
 
             <View
-                android:layout_width="2dip"
-                android:layout_height="23dp"
+                android:layout_width="1dip"
+                android:layout_height="21dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
+                android:layout_marginRight="4dp"
                 android:background="#EEEFFF" />
 
             <EditText
@@ -95,8 +102,16 @@
                 android:hint="@string/hint_password"
                 android:textColorHint="#AAAAAA"
                 android:inputType="textPassword"
-                android:textColor="#333333"
+                android:textColor="@color/colorEditTextEnabled"
                 android:textSize="18dp" />
+            <ImageView
+                android:id="@+id/imageView_btn_del_password"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerInside"
+                android:visibility="invisible"
+                android:src="@drawable/icon_delete" />
         </LinearLayout>
 
         <LinearLayout
@@ -119,9 +134,43 @@
                 android:layout_marginTop="8dp"
                 android:background="@null"
                 android:gravity="center"
-                android:text="@string/register"
-                android:textColor="#fefefe"
+                android:text="@string/login"
+                android:textColor="@color/colorEditTextEnabled"
                 android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_findpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textSize="15dp"
+                android:textColor="#EEEEEE"
+                android:text="@string/findpassword" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/textView_switchto_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:textSize="15dp"
+                android:textColor="#EEEEEE"
+                android:text="@string/switchto_register" />
+
         </LinearLayout>
 
     </LinearLayout>

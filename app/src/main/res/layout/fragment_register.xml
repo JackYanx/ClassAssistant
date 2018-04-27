@@ -28,18 +28,18 @@
 
             <ImageView
                 android:id="@+id/imageView_icon_userName"
-                android:layout_width="wrap_content"
+                android:layout_width="21dp"
                 android:layout_height="18dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/icon_user" />
 
             <View
-                android:layout_width="2dip"
-                android:layout_height="23dp"
+                android:layout_width="1dip"
+                android:layout_height="21dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
+                android:layout_marginRight="4dp"
                 android:background="#EEEFFF" />
 
             <EditText
@@ -53,8 +53,18 @@
                 android:hint="@string/hint_userName"
                 android:textColorHint="#AAAAAA"
                 android:inputType="textPersonName"
-                android:textColor="#333333"
+                android:textColor="@color/colorEditTextEnabled"
                 android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/imageView_btn_del_userName"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerInside"
+                android:visibility="invisible"
+                android:src="@drawable/icon_delete" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -68,18 +78,18 @@
 
             <ImageView
                 android:id="@+id/imageViewimageView_icon_phoneNumber"
-                android:layout_width="wrap_content"
+                android:layout_width="21dp"
                 android:layout_height="18dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/icon_phone" />
 
             <View
-                android:layout_width="2dip"
-                android:layout_height="23dp"
+                android:layout_width="1dip"
+                android:layout_height="21dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
+                android:layout_marginRight="4dp"
                 android:background="#EEEFFF" />
 
             <EditText
@@ -93,8 +103,18 @@
                 android:hint="@string/hint_phoneNumber"
                 android:textColorHint="#AAAAAA"
                 android:inputType="textPersonName"
-                android:textColor="#333333"
+                android:textColor="@color/colorEditTextEnabled"
                 android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/imageView_btn_del_phoneNumber"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerInside"
+                android:visibility="invisible"
+                android:src="@drawable/icon_delete" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -108,20 +128,18 @@
 
             <ImageView
                 android:id="@+id/imageViewimageView_icon_password"
-                android:layout_width="wrap_content"
+                android:layout_width="21dp"
                 android:layout_height="18dp"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
                 android:scaleType="centerInside"
                 android:src="@drawable/icon_password" />
 
             <View
-                android:layout_width="2dip"
-                android:layout_height="23dp"
+                android:layout_width="1dip"
+                android:layout_height="21dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
+                android:layout_marginRight="4dp"
                 android:background="#EEEFFF" />
 
             <EditText
@@ -135,8 +153,18 @@
                 android:hint="@string/hint_password"
                 android:textColorHint="#AAAAAA"
                 android:inputType="textPassword"
-                android:textColor="#333333"
+                android:textColor="@color/colorEditTextEnabled"
                 android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/imageView_btn_del_password"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerInside"
+                android:visibility="invisible"
+                android:src="@drawable/icon_delete" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -160,11 +188,31 @@
                 android:background="@null"
                 android:gravity="center"
                 android:text="@string/register"
-                android:textColor="#fefefe"
+                android:textColor="@color/colorEditTextEnabled"
                 android:textSize="18dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView_switchto_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="#EEEEEE"
+                android:text="@string/switchto_login" />
+        </LinearLayout>
+
     </LinearLayout>
+
+
 
 
 </LinearLayout>

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,11 +15,14 @@ import com.zeromirai.classassistant.R;
 import com.zeromirai.classassistant.authentication.fragment.LoginFragment;
 import com.zeromirai.classassistant.authentication.fragment.RegisterFragment;
 
+import java.lang.ref.WeakReference;
+
 public class AuthenticationActivity extends Activity {
 
     public static final String TAG = AuthenticationActivity.class.getName();
 
     private int fragmentStatus = 0;
+    private int isInProcess = 0;
 
     private FragmentManager fragmentManager = null;
     private FragmentTransaction fragmentTransaction = null;
@@ -34,6 +39,7 @@ public class AuthenticationActivity extends Activity {
         setContentView(R.layout.activity_authentication);
         setView();
         setListeners();
+
         //throw new RuntimeException("突然想抛个异常>_<");
     }
 
@@ -41,6 +47,7 @@ public class AuthenticationActivity extends Activity {
 
         textView_login = (TextView) findViewById(R.id.textView_login);
         textView_register = (TextView) findViewById(R.id.textView_register);
+
 
         /*初始化相关Fragments*/
         fragmentManager = getFragmentManager();
@@ -77,20 +84,10 @@ public class AuthenticationActivity extends Activity {
             public void onClick(View v) {
                 Log.d(TAG,"textView_login pressed");
 
-                if(fragmentStatus == 0){
+                if(!switchToLoginUI()){
                     return;
                 }
-                fragmentStatus = 0;
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.hide(registerFragment);
-                fragmentTransaction.show(loginFragment);
-                fragmentTransaction.commit();
 
-                textView_login.setTextColor(getResources().getColor(R.color.colorActivatedText));
-                textView_register.setTextColor(getResources().getColor(R.color.colorInactivatedText));
-
-                Log.d(TAG,"change to loginFragment");
             }
         });
 
@@ -99,29 +96,14 @@ public class AuthenticationActivity extends Activity {
             public void onClick(View v) {
                 Log.d(TAG,"textView_register pressed");
 
-                if(fragmentStatus == 1){
+                if(!switchToRegisterUI()){
                     return;
                 }
-                fragmentStatus = 1;
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.hide(loginFragment);
-                fragmentTransaction.show(registerFragment);
-                fragmentTransaction.commit();
 
-                textView_register.setTextColor(getResources().getColor(R.color.colorActivatedText));
-                textView_login.setTextColor(getResources().getColor(R.color.colorInactivatedText));
 
-                Log.d(TAG,"change to registerFragment");
             }
         });
     }
-
-
-
-
-
-
 
 
 
@@ -177,7 +159,81 @@ public class AuthenticationActivity extends Activity {
          */
     }
 
+    public boolean switchToLoginUI(){
+        if(fragmentStatus == 0){
+            Log.d(TAG,"Already in LoginUI");
+            return false;
+        }
+        fragmentStatus = 0;
+        fragmentManager = getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.hide(registerFragment);
+        fragmentTransaction.show(loginFragment);
+        fragmentTransaction.commit();
+
+        textView_login.setTextColor(getResources().getColor(R.color.colorActivatedText));
+        textView_register.setTextColor(getResources().getColor(R.color.colorInactivatedText));
+
+        Log.d(TAG,"switchToLoginUI");
+        return true;
+    }
+
+    public boolean switchToRegisterUI(){
+        if(fragmentStatus == 1){
+            Log.d(TAG,"Already in RegisterUI");
+            return false;
+        }
+        fragmentStatus = 1;
+        fragmentManager = getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.hide(loginFragment);
+        fragmentTransaction.show(registerFragment);
+        fragmentTransaction.commit();
+
+        textView_register.setTextColor(getResources().getColor(R.color.colorActivatedText));
+        textView_login.setTextColor(getResources().getColor(R.color.colorInactivatedText));
+
+        Log.d(TAG,"switchToRegisterUI");
+        return true;
+    }
 
 
+    private Handler mHandler = new AuthenticationHandler(this);
+
+    class AuthenticationHandler extends Handler{
+        private WeakReference<AuthenticationActivity> authenticationActivity;
+        public AuthenticationHandler(AuthenticationActivity authenticationActivity){
+            this.authenticationActivity = new WeakReference<AuthenticationActivity>(authenticationActivity);
+        }
+        public void handleMessage(Message msg) {
+            Activity activity = this.authenticationActivity.get();
+            if (activity == null) return;
+            /*登录*/
+            if(fragmentStatus == 0){
+                switch (msg.what){
+
+                }
+            }
+            /*注册*/
+            else if(fragmentStatus == 1){
+                switch (msg.what){
+
+                }
+            }
+            /*其他*/
+            else{
+                Log.d(TAG, "ERROR STATUS");
+                throw new RuntimeException(Config.ERRMSG_XXX);
+            }
+
+        }
+    }
+
+    public void sendMessageByHandler(int what, Object object) {
+        Message message = mHandler.obtainMessage();
+        message.what = what;
+        message.obj = object;
+        mHandler.sendMessage(message);
+    }
 
 }

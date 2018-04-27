@@ -11,5 +11,8 @@
     <color name="colorLoginBtnPressDown">#17599c</color>
     <color name="colorLoginBtnPressUp">#073c71</color>
 
+    <color name="colorEditTextEnabled">#ffffff</color>
+    <color name="colorEditTextDisabled">#dbdbdb</color>
+
 
 </resources>

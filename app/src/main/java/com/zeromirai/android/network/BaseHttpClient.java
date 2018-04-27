@@ -1,15 +1,25 @@
 package com.zeromirai.android.network;
 
+/**
+ * Created by initialize on 2018/4/19.
+ */
+
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,6 +33,8 @@ import okhttp3.Response;
 
 public class BaseHttpClient {
 
+    public static final String USERAGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36";
+
     private OkHttpClient okHttpClient = null;
     private Request request = null;
     private Response response = null;
@@ -31,9 +43,10 @@ public class BaseHttpClient {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public BaseHttpClient(){
         okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(10,TimeUnit.SECONDS)//设置读取超时时间
+                .readTimeout(10, TimeUnit.SECONDS)//设置读取超时时间
                 .writeTimeout(10,TimeUnit.SECONDS)//设置写的超时时间
                 .connectTimeout(10,TimeUnit.SECONDS)//设置连接超时时间
+                .cookieJar(new LocalCookieJar())
                 .build();
     }
 
@@ -48,6 +61,7 @@ public class BaseHttpClient {
     public String get(String url) throws IOException {
         String result = "";
         request = new Request.Builder()
+                .addHeader("User-Agent",USERAGENT)
                 .url(url)
                 .build();
 
@@ -74,6 +88,7 @@ public class BaseHttpClient {
 
         requestBody = formBodyBuilder.build();
         request = new Request.Builder()
+                .addHeader("User-Agent",USERAGENT)
                 .url(url)
                 .post(requestBody)
                 .build();
@@ -97,6 +112,7 @@ public class BaseHttpClient {
 
         requestBody = RequestBody.create(JSON, json);
         request = new Request.Builder()
+                .addHeader("User-Agent",USERAGENT)
                 .url(url)
                 .post(requestBody)
                 .build();
@@ -107,7 +123,7 @@ public class BaseHttpClient {
     }
 
     /**
-     * 检测当前网络是否可用
+     * 检测当前网络是否可用(仅限Android平台)
      * @param context 组件上下文
      * @return 是否可用
      */
@@ -132,3 +148,21 @@ public class BaseHttpClient {
     }
 
 }
+
+/*缓存处理Cookie*/
+class LocalCookieJar implements CookieJar {
+    List<Cookie> cookies;
+    @Override
+    public List<Cookie> loadForRequest(HttpUrl arg0) {
+        if (cookies != null)
+            return cookies;
+        return new ArrayList<Cookie>();
+    }
+
+    @Override
+    public void saveFromResponse(HttpUrl arg0, List<Cookie> cookies) {
+        this.cookies = cookies;
+    }
+
+}
+
