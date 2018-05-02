@@ -2,7 +2,8 @@
     <string name="app_name">ClassAssistant</string>
     <string name="register">注册</string>
     <string name="login">登录</string>
-    <string name="hint_userName">用户名/邮箱</string>
+    <string name="hint_userName">用户名</string>
+    <string name="hint_multiply">用户名/邮箱/手机</string>
     <string name="hint_password">密码</string>
     <string name="hint_phoneNumber">手机号</string>
     <string name="hint_emailAddress">邮箱</string>
@@ -10,5 +11,7 @@
     <string name="switchto_login"><u>已有账号?</u></string>
     <string name="switchto_register"><u>创建账号</u></string>
     <string name="findpassword"><u>找回密码</u></string>
+    <string name="reg_with_email"><u>使用邮箱</u></string>
+    <string name="reg_with_phoneNumber"><u>使用手机</u></string>
 
 </resources>

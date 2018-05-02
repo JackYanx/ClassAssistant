@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.R;
 import com.zeromirai.classassistant.authentication.AuthenticationActivity;
 import com.zeromirai.classassistant.authentication.runnable.LoginRunnable;
@@ -112,7 +112,7 @@ public class LoginFragment extends Fragment {
                                     public void run() {
                                         LoginFragment.this.setViewDisabled();
                                         Toast.makeText(parentActivity,"setViewDisabled",Toast.LENGTH_LONG);
-                                        Log.d(TAG,"setViewDisabled");
+                                        ZRLog.d(TAG,"setViewDisabled");
                                     }
                                 });
                                 String[] args = new String[] {
@@ -141,7 +141,7 @@ public class LoginFragment extends Fragment {
         textView_switchto_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"textView_switchto_register pressed");
+                ZRLog.d(TAG,"textView_switchto_register pressed");
                 parentActivity.switchToRegisterUI();
             }
         });

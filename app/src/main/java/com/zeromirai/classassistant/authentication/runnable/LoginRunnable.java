@@ -1,10 +1,10 @@
 package com.zeromirai.classassistant.authentication.runnable;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.zeromirai.android.network.BaseHttpClient;
 import com.zeromirai.android.text.RegexUtils;
+import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.authentication.AuthenticationActivity;
 import com.zeromirai.classassistant.authentication.Config;
 import com.zeromirai.classassistant.common.cache.LocalCache;
@@ -38,10 +38,9 @@ public class LoginRunnable implements Runnable {
 
     @Override
     public void run(){
-        //此变量记录注册进度
+        ZRLog.d(TAG,"LoginRunnableStarting");
+        //此变量记录登录进度
         int processCode = 1;
-        baseHttpClient = new BaseHttpClient();
-
         try{
 
             /*验证用户名/手机号/邮箱地址输入是否为空*/
@@ -96,18 +95,20 @@ public class LoginRunnable implements Runnable {
             }
             params.put("password",password);
             params.put("timeStamp",""+System.currentTimeMillis() / 1000);
+            params.put("actionType","login");
             processCode = 6;
 
             /*检查网络连接*/
             if(!BaseHttpClient.isNetworkAvailable(authenticationActivity)){
-                Log.d(TAG, "Network is not available.Please check connection or permission about Internet");
+                ZRLog.d(TAG, "Network is not available.Please check connection or permission about Internet");
                 throw new Exception();
             }
             processCode = 7;
 
             /*发送Post请求(阻塞)*/
+            baseHttpClient = new BaseHttpClient();
             String result = baseHttpClient.post(Config.API_LOGIN,params);
-            Log.d(TAG, "LOGIN RET MSG:\n" + result);
+            ZRLog.d(TAG, "LOGIN RET MSG:\n" + result);
             processCode = 8;
 
             /*解析为Json类型数据*/
@@ -130,9 +131,10 @@ public class LoginRunnable implements Runnable {
             processCode = 0;
 
         }catch (Exception e){
-            Log.d(TAG,Config.ERRMSG_LOGIN[processCode] + e.getMessage());
+            ZRLog.d(TAG,Config.ERRMSG_LOGIN[processCode] + e.getMessage());
         }finally {
             authenticationActivity.sendMessageByHandler(processCode,Config.ERRMSG_LOGIN[processCode]);
+            ZRLog.d(TAG,"LoginRunnableClosing");
         }
     }
 

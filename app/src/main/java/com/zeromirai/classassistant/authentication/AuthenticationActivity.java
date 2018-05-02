@@ -6,11 +6,11 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.R;
 import com.zeromirai.classassistant.authentication.fragment.LoginFragment;
 import com.zeromirai.classassistant.authentication.fragment.RegisterFragment;
@@ -82,7 +82,7 @@ public class AuthenticationActivity extends Activity {
         textView_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"textView_login pressed");
+                ZRLog.d(TAG,"textView_login pressed");
 
                 if(!switchToLoginUI()){
                     return;
@@ -94,7 +94,7 @@ public class AuthenticationActivity extends Activity {
         textView_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"textView_register pressed");
+                ZRLog.d(TAG,"textView_register pressed");
 
                 if(!switchToRegisterUI()){
                     return;
@@ -110,43 +110,43 @@ public class AuthenticationActivity extends Activity {
     @Override
     protected void onStart(){
         super.onStart();
-        Log.d(TAG,"onStart()");
+        ZRLog.d(TAG,"onStart()");
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        Log.d(TAG,"onResume()");
+        ZRLog.d(TAG,"onResume()");
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        Log.d(TAG,"onPause()");
+        ZRLog.d(TAG,"onPause()");
     }
 
     @Override
     protected void onStop(){
         super.onStop();
-        Log.d(TAG,"onStop()");
+        ZRLog.d(TAG,"onStop()");
     }
 
     @Override
     protected void onRestart(){
         super.onRestart();
-        Log.d(TAG,"onRestart()");
+        ZRLog.d(TAG,"onRestart()");
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        Log.d(TAG,"onDestroy()");
+        ZRLog.d(TAG,"onDestroy()");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.d(TAG,"onSaveInstanceState()");
+        ZRLog.d(TAG,"onSaveInstanceState()");
         /**
          *  例如:
          *  1,屏幕方向改变时,Activity被销毁再重建;
@@ -161,7 +161,7 @@ public class AuthenticationActivity extends Activity {
 
     public boolean switchToLoginUI(){
         if(fragmentStatus == 0){
-            Log.d(TAG,"Already in LoginUI");
+            ZRLog.d(TAG,"Already in LoginUI");
             return false;
         }
         fragmentStatus = 0;
@@ -174,13 +174,13 @@ public class AuthenticationActivity extends Activity {
         textView_login.setTextColor(getResources().getColor(R.color.colorActivatedText));
         textView_register.setTextColor(getResources().getColor(R.color.colorInactivatedText));
 
-        Log.d(TAG,"switchToLoginUI");
+        ZRLog.d(TAG,"switchToLoginUI");
         return true;
     }
 
     public boolean switchToRegisterUI(){
         if(fragmentStatus == 1){
-            Log.d(TAG,"Already in RegisterUI");
+            ZRLog.d(TAG,"Already in RegisterUI");
             return false;
         }
         fragmentStatus = 1;
@@ -193,7 +193,7 @@ public class AuthenticationActivity extends Activity {
         textView_register.setTextColor(getResources().getColor(R.color.colorActivatedText));
         textView_login.setTextColor(getResources().getColor(R.color.colorInactivatedText));
 
-        Log.d(TAG,"switchToRegisterUI");
+        ZRLog.d(TAG,"switchToRegisterUI");
         return true;
     }
 
@@ -254,7 +254,7 @@ public class AuthenticationActivity extends Activity {
             }
             /*其他*/
             else{
-                Log.d(TAG, "ERROR STATUS");
+                ZRLog.d(TAG, "ERROR STATUS");
                 throw new RuntimeException(Config.ERRMSG_XXX);
             }
 
