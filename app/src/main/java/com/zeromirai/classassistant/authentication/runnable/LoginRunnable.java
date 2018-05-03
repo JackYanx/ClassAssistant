@@ -51,14 +51,14 @@ public class LoginRunnable implements Runnable {
 
             /*验证是否为合法用户名/手机号/邮箱地址*/
             if(RegexUtils.isLegalUsername(userName)){
-                loginType = 1;
+                loginType = Config.LOGIN_WITH_USERNAME;
             }
             else if(RegexUtils.isLegalPhoneNumber(userName)){
-                loginType = 2;
+                loginType = Config.LOGIN_WITH_PHONENUMBER;
                 phoneNumber = userName;
             }
             else if(RegexUtils.isLegalEmailAdderss(userName)){
-                loginType = 3;
+                loginType = Config.LOGIN_WITH_EMAILADDRESS;
                 emailAddress = userName;
             }
             else {
@@ -81,13 +81,13 @@ public class LoginRunnable implements Runnable {
             /*构造Post参数表*/
             SortedMap<String,String> params = new TreeMap<>();
             switch (loginType){
-                case 1:
+                case Config.LOGIN_WITH_USERNAME:
                     params.put("userName",userName);
                     break;
-                case 2:
+                case Config.LOGIN_WITH_PHONENUMBER:
                     params.put("phoneNumber",phoneNumber);
                     break;
-                case 3:
+                case Config.LOGIN_WITH_EMAILADDRESS:
                     params.put("emailAddress",emailAddress);
                     break;
                 default:

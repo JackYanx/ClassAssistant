@@ -3,6 +3,7 @@ package com.zeromirai.classassistant.authentication.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,6 +44,8 @@ public class LoginFragment extends Fragment {
 
     private ImageView imageView_btn_del_userName;
     private ImageView imageView_btn_del_password;
+
+    private ProgressDialog waitingDialog;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -102,32 +105,22 @@ public class LoginFragment extends Fragment {
                     case MotionEvent.ACTION_UP:{
                         linearLayout_btn_login.setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_button_login));
 
-                        new Thread(){
+                        parentActivity.runOnUiThread(new Runnable() {
                             @Override
-                            public void run(){
-
-
-                                parentActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        LoginFragment.this.setViewDisabled();
-                                        Toast.makeText(parentActivity,"setViewDisabled",Toast.LENGTH_LONG);
-                                        ZRLog.d(TAG,"setViewDisabled");
-                                    }
-                                });
-                                String[] args = new String[] {
-                                        editText_userName.getText().toString(),
-                                        editText_password.getText().toString(),
-                                        "",
-                                        ""
-                                };
-                                new Thread(new LoginRunnable(parentActivity,args)).start();
-
-
+                            public void run() {
+                                LoginFragment.this.setViewDisabled();
+                                Toast.makeText(parentActivity,"setViewDisabled",Toast.LENGTH_LONG);
+                                ZRLog.d(TAG,"setViewDisabled");
                             }
-                        }.start();
-
-
+                        });
+                        String[] args = new String[] {
+                                editText_userName.getText().toString(),
+                                editText_password.getText().toString(),
+                                "",
+                                ""
+                        };
+                        new Thread(new LoginRunnable(parentActivity,args)).start();
+                        showWaitingDialog();
 
                         break;
                     }
@@ -222,6 +215,31 @@ public class LoginFragment extends Fragment {
         textView_findpassword.setEnabled(true);
         editText_userName.setTextColor(getResources().getColor(R.color.colorEditTextEnabled));
         editText_password.setTextColor(getResources().getColor(R.color.colorEditTextEnabled));
+    }
+
+    public void showWaitingDialog() {
+        if(waitingDialog != null && waitingDialog.isShowing()){
+            ZRLog.d(TAG,"showWaitingDialog() : waitingDialog is showing");
+            return;
+        }
+        waitingDialog= new ProgressDialog(parentActivity);
+        waitingDialog.setTitle("登录中");
+        waitingDialog.setMessage("等待中...");
+        waitingDialog.setIndeterminate(true);
+        waitingDialog.setCancelable(false);
+        waitingDialog.show();
+    }
+
+    public void dismissWaitingDialog() {
+        if(waitingDialog != null){
+            if(waitingDialog.isShowing()) {
+                waitingDialog.dismiss();
+                return;
+            }
+            ZRLog.d(TAG,"dismissWaitingDialog() : waitingDialog is not showing");
+            return;
+        }
+        ZRLog.d(TAG,"waitingDialog NullPointer");
     }
 
 }

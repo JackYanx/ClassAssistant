@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.zeromirai.android.permission.PermissionManager;
 import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.R;
 import com.zeromirai.classassistant.authentication.fragment.LoginFragment;
@@ -39,7 +40,7 @@ public class AuthenticationActivity extends Activity {
         setContentView(R.layout.activity_authentication);
         setView();
         setListeners();
-
+        PermissionManager.verifyStoragePermissions(AuthenticationActivity.this);
         //throw new RuntimeException("突然想抛个异常>_<");
     }
 
@@ -209,47 +210,129 @@ public class AuthenticationActivity extends Activity {
             Activity activity = this.authenticationActivity.get();
             if (activity == null) return;
             /*登录*/
-            if(fragmentStatus == 0){
+            if(fragmentStatus == 0 && loginFragment != null){
                 switch (msg.what){
                     case 0:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 1:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 2:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 3:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 4:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 5:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 6:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 7:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 8:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 9:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                     case 10:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
+                        break;
+                    }
+                    default:{
+                        loginFragment.dismissWaitingDialog();
+                        loginFragment.setViewEnabled();
                         break;
                     }
                 }
             }
             /*注册*/
-            else if(fragmentStatus == 1){
+            else if(fragmentStatus == 1 && registerFragment != null){
                 switch (msg.what){
+                    case 0:{
 
+                        break;
+                    }
+                    case 1:{
+
+                        break;
+                    }
+                    case 2:{
+
+                        break;
+                    }
+                    case 3:{
+
+                        break;
+                    }
+                    case 4:{
+
+                        break;
+                    }
+                    case 5:{
+
+                        break;
+                    }
+                    case 6:{
+
+                        break;
+                    }
+                    case 7:{
+
+                        break;
+                    }
+                    case 8:{
+
+                        break;
+                    }
+                    case 9:{
+
+                        break;
+                    }
+                    case 10:{
+
+                        break;
+                    }
+                    case 11:{
+
+                        break;
+                    }
+                    case 12:{
+
+                        break;
+                    }
+                    default:{
+
+                        break;
+                    }
                 }
             }
             /*其他*/

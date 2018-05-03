@@ -3,6 +3,7 @@ package com.zeromirai.classassistant.authentication.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -47,6 +48,8 @@ public class RegisterFragment extends Fragment {
     private ImageView imageView_btn_del_userName;
     private ImageView imageView_btn_del_phoneNumber;
     private ImageView imageView_btn_del_password;
+
+    private ProgressDialog waitingDialog;
 
     private int regWithEmail = 0;
 
@@ -111,38 +114,29 @@ public class RegisterFragment extends Fragment {
                     case MotionEvent.ACTION_UP:{
                         linearLayout_btn_register.setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_button_register));
 
-                        new Thread(){
+                        parentActivity.runOnUiThread(new Runnable() {
                             @Override
-                            public void run(){
-
-
-                                parentActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        RegisterFragment.this.setViewDisabled();
-                                        Toast.makeText(parentActivity,"setViewDisabled",Toast.LENGTH_LONG);
-                                        ZRLog.d(TAG,"setViewDisabled");
-                                    }
-                                });
-                                String[] args = new String[] {
-                                        2+regWithEmail+"",
-                                        editText_userName.getText().toString(),
-                                        "",
-                                        editText_password.getText().toString(),
-                                };
-                                if(regWithEmail == 0){
-                                    args[2] = editText_phoneNumber.getText().toString();
-                                }else if(regWithEmail == 1){
-                                    args[2] = editText_phoneNumber.getText().toString();
-                                }else{
-                                    ZRLog.e(TAG,"");
-                                }
-                                new Thread(new RegisterRunnable(parentActivity,args)).start();
-
-
+                            public void run() {
+                                RegisterFragment.this.setViewDisabled();
+                                Toast.makeText(parentActivity,"setViewDisabled",Toast.LENGTH_LONG);
+                                ZRLog.d(TAG,"setViewDisabled");
                             }
-                        }.start();
-
+                        });
+                        String[] args = new String[] {
+                                2+regWithEmail+"",
+                                editText_userName.getText().toString(),
+                                "",
+                                editText_password.getText().toString(),
+                        };
+                        if(regWithEmail == 0){
+                            args[2] = editText_phoneNumber.getText().toString();
+                        }else if(regWithEmail == 1){
+                            args[2] = editText_phoneNumber.getText().toString();
+                        }else{
+                            ZRLog.e(TAG,"");
+                        }
+                        new Thread(new RegisterRunnable(parentActivity,args)).start();
+                        showWaitingDialog();
 
                         break;
                     }
@@ -323,6 +317,31 @@ public class RegisterFragment extends Fragment {
     public int getRegWay(){
         /*0为手机号,1为Email*/
         return regWithEmail;
+    }
+
+    public void showWaitingDialog() {
+        if(waitingDialog != null && waitingDialog.isShowing()){
+            ZRLog.d(TAG,"showWaitingDialog() : waitingDialog is showing");
+            return;
+        }
+        waitingDialog= new ProgressDialog(parentActivity);
+        waitingDialog.setTitle("注册中");
+        waitingDialog.setMessage("等待中...");
+        waitingDialog.setIndeterminate(true);
+        waitingDialog.setCancelable(false);
+        waitingDialog.show();
+    }
+
+    public void dismissWaitingDialog() {
+        if(waitingDialog != null){
+            if(waitingDialog.isShowing()) {
+                waitingDialog.dismiss();
+                return;
+            }
+            ZRLog.d(TAG,"dismissWaitingDialog() : waitingDialog is not showing");
+            return;
+        }
+        ZRLog.d(TAG,"waitingDialog NullPointer");
     }
 
 }

@@ -34,9 +34,9 @@ public class RegisterRunnable implements Runnable {
         this.authenticationActivity = authenticationActivity;
         regType = Integer.parseInt(args[0]);
         userName = args[1];
-        if(regType == 2){
+        if(regType == Config.REG_WITH_PHONENUMBER){
             phoneNumber = args[2];
-        }else if(regType == 3){
+        }else if(regType == Config.REG_WITH_EMAILADDRESS){
             emailAddress = args[2];
         }else{
             ZRLog.d(TAG,"regType: " + args[0]);
@@ -52,19 +52,19 @@ public class RegisterRunnable implements Runnable {
         int processCode = 1;
         try{
 
-            /*验证用户名/手机号/邮箱地址输入是否为空*/
+            /*验证用户名是否为空*/
             if(TextUtils.isEmpty(userName)){
                 throw new Exception();
             }
             processCode = 2;
 
-            /*验证是否为合法用户名/手机号/邮箱地址*/
+            /*验证是否为合法用户名*/
             if(!RegexUtils.isLegalUsername(userName)){
                 throw new Exception();
             }
             processCode = 3;
 
-            if(regType == 2){
+            if(regType == Config.REG_WITH_PHONENUMBER){
                 /*验证手机号输入是否为空*/
                 if(TextUtils.isEmpty(phoneNumber)){
                     throw new Exception();
@@ -77,7 +77,7 @@ public class RegisterRunnable implements Runnable {
                 }
                 processCode = 5;
 
-            }else if(regType == 3){
+            }else if(regType == Config.REG_WITH_EMAILADDRESS){
                 /*验证邮箱输入是否为空*/
                 if(TextUtils.isEmpty(emailAddress)){
                     throw new Exception();
@@ -111,10 +111,10 @@ public class RegisterRunnable implements Runnable {
             SortedMap<String,String> params = new TreeMap<>();
             params.put("userName",userName);
             switch (regType){
-                case 2:
+                case Config.REG_WITH_PHONENUMBER:
                     params.put("phoneNumber",phoneNumber);
                     break;
-                case 3:
+                case Config.REG_WITH_EMAILADDRESS:
                     params.put("emailAddress",emailAddress);
                     break;
                 default:
