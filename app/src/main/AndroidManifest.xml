@@ -33,37 +33,32 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.ZRSplash"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ZRSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".main.MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".authentication.AuthenticationActivity"
-            android:theme="@style/ZRBlackTheme.Theme"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/ZRBlackTheme.Theme" />
+        <activity android:name=".statcheck.StatcheckActivity" />
+        <activity android:name=".schedule.ScheduleActivity" />
+        <activity android:name=".schedule.SearchActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.zeromirai.android.network;
+package com.zeromirai.android.network.httpclient;
 
 /**
  * Created by initialize on 2018/4/19.

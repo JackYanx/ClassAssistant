@@ -2,7 +2,7 @@ package com.zeromirai.classassistant.authentication.runnable;
 
 import android.text.TextUtils;
 
-import com.zeromirai.android.network.BaseHttpClient;
+import com.zeromirai.android.network.httpclient.BaseHttpClient;
 import com.zeromirai.android.text.RegexUtils;
 import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.authentication.AuthenticationActivity;
