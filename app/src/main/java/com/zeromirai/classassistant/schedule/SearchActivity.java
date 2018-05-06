@@ -1,11 +1,11 @@
 package com.zeromirai.classassistant.schedule;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.app.Activity;
 
 import com.zeromirai.classassistant.R;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
