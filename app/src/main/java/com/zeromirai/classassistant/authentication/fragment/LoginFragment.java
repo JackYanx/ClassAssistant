@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.zeromirai.classassistant.R;
+import com.zeromirai.classassistant.fee.FeeActivity;
 import com.zeromirai.classassistant.schedule.ScheduleActivity;
 
 /**
@@ -31,7 +32,7 @@ public class LoginFragment extends Fragment {
     private LinearLayout linearLayout_btn_login;
 
 
-    private Button button1;
+    private Button button1,button2;  //button1  button2分别用于跳转到scheduleActivity和feeActivity
 
 
     public LoginFragment() {
@@ -64,6 +65,14 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), ScheduleActivity.class));
+
+            }
+        });
+        button2=(Button)view.findViewById(R.id.clickFee);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), FeeActivity.class));
 
             }
         });

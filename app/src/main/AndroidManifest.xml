@@ -51,13 +51,13 @@
         </activity>
         <activity
             android:name=".main.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".authentication.AuthenticationActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ZRBlackTheme.Theme"></activity>
-        <activity android:name=".schedule.ScheduleActivity"></activity>
-
+            android:theme="@style/ZRBlackTheme.Theme" />
+        <activity android:name=".schedule.ScheduleActivity" />
+        <activity android:name=".fee.FeeActivity"></activity>
     </application>
 
 </manifest>
