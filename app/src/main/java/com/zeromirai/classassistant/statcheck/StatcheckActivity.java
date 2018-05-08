@@ -1,5 +1,6 @@
 package com.zeromirai.classassistant.statcheck;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class StatcheckActivity extends AppCompatActivity implements View.OnClickListener {
+public class StatcheckActivity extends Activity implements View.OnClickListener {
 
     private List<String> list;
     private ListAdapter adapter;
@@ -95,15 +96,18 @@ public class StatcheckActivity extends AppCompatActivity implements View.OnClick
         return super.onOptionsItemSelected(item);
     }
 
+    private String[] data={"Apple","Banana","Orange","Watermelon","Pear","Grape","Pineapple","Strawberry","Cherry","Mango",
+            "Apple","Banana","Orange","Watermelon","Pear","Grape","Pineapple","Strawberry","Cherry","Mango"};
     /**
      * 为列表添加测试数据
      */
     private void initData() {
-        File directory = Environment.getExternalStorageDirectory();
-        File[] files = directory.listFiles();
+//        File directory = Environment.getExternalStorageDirectory();
+//        File[] files = directory.listFiles();
+
         list = new ArrayList<>();
-        for (File file : files) {
-            list.add(file.getName());
+        for (String student: data) {
+            list.add(student);
         }
     }
 }

@@ -50,9 +50,6 @@ public class LoginFragment extends Fragment {
 
     private ProgressDialog waitingDialog;
 
-    private Button button2login;
-
-
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -78,14 +75,6 @@ public class LoginFragment extends Fragment {
         setView();
         setListeners();
 
-        button2login=(Button)view.findViewById(R.id.button2login);
-        button2login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),RegisterFragment.class );
-                startActivity(intent);
-            }
-        });
 
         return view;
     }
@@ -120,6 +109,8 @@ public class LoginFragment extends Fragment {
                     }
                     case MotionEvent.ACTION_UP:{
                         linearLayout_btn_login.setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_button_login));
+
+                        startActivity(new Intent(parentActivity,StatcheckActivity.class));
 
                         parentActivity.runOnUiThread(new Runnable() {
                             @Override

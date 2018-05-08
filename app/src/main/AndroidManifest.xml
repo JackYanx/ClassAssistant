@@ -56,7 +56,8 @@
             android:name=".authentication.AuthenticationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ZRBlackTheme.Theme" />
-        <activity android:name=".statcheck.StatcheckActivity" />
+        <activity android:name=".statcheck.StatcheckActivity"
+                    />
         <activity android:name=".schedule.ScheduleActivity" />
         <activity android:name=".schedule.SearchActivity"></activity>
     </application>

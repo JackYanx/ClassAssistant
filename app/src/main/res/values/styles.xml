@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+
     <style name="Theme.ZRSplash" parent="AppTheme">
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -27,5 +28,6 @@
         <item name="colorControlNormal">#aaaaaa</item>
         <item name="colorControlActivated">#ff8800</item>
     </style>
+
 
 </resources>
