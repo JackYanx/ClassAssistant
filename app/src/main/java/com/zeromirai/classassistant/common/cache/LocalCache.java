@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.zeromirai.android.text.JsonUtils.optStrToJsonObject;
@@ -92,6 +94,19 @@ public class LocalCache extends AbstractCache {
     public String getScheduleData(){
         String str = sharedPreferences.getString(SCHEDULEDATAINFO, "");
         return str;
+    }
+
+    /*
+    * 从缓存中获取课表信息(JSON)
+    */
+    @Nullable
+    public JSONArray getScheduleDataJSON(){
+        try{
+            return new JSONArray(getScheduleData());
+        }catch (JSONException je){
+            je.printStackTrace();
+        }
+        return null;
     }
 
     /*

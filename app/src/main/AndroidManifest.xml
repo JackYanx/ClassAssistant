@@ -55,13 +55,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".authentication.AuthenticationActivity"
-            android:screenOrientation="portrait"
-                   />
-
-        <activity android:name=".statcheck.StatcheckActivity"
-                    />
+            android:screenOrientation="portrait" />
+        <activity android:name=".statcheck.StatcheckActivity" />
         <activity android:name=".schedule.ScheduleActivity" />
-        <activity android:name=".schedule.SearchActivity"></activity>
+        <activity android:name=".schedule.SearchActivity" />
+        <activity android:name=".schedule.JwcLoginActivity"></activity>
     </application>
 
 </manifest>
