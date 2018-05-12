@@ -104,7 +104,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item222, parent, false);
+        View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
         ViewHolder vh = new ViewHolder(root);
         //为Item设置点击事件
         root.setOnClickListener(this);

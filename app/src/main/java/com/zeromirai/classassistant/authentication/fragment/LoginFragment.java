@@ -25,6 +25,7 @@ import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.R;
 import com.zeromirai.classassistant.authentication.AuthenticationActivity;
 import com.zeromirai.classassistant.authentication.runnable.LoginRunnable;
+import com.zeromirai.classassistant.main.MainActivity;
 import com.zeromirai.classassistant.statcheck.StatcheckActivity;
 
 /**
@@ -110,7 +111,7 @@ public class LoginFragment extends Fragment {
                     case MotionEvent.ACTION_UP:{
                         linearLayout_btn_login.setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_button_login));
 
-                        startActivity(new Intent(parentActivity,StatcheckActivity.class));
+                        startActivity(new Intent(parentActivity,MainActivity.class));
 
                         parentActivity.runOnUiThread(new Runnable() {
                             @Override

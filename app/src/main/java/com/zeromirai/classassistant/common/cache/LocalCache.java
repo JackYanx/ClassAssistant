@@ -18,6 +18,7 @@ import static com.zeromirai.android.text.JsonUtils.optStrToJsonObject;
 public class LocalCache extends AbstractCache {
 
     public static final String USERDATAINFO = "USERDATAINFO";
+    public static final String SCHEDULEDATAINFO = "SCHEDULEDATAINFO";
 
     /*
     * 构造函数,传入Context
@@ -83,4 +84,35 @@ public class LocalCache extends AbstractCache {
         editor.putString(USERDATAINFO, "");
         editor.apply();
     }
+
+    /*
+    * 从缓存中获取课表信息
+    */
+    @Nullable
+    public String getScheduleData(){
+        String str = sharedPreferences.getString(SCHEDULEDATAINFO, "");
+        return str;
+    }
+
+    /*
+    * 更新缓存中课表信息
+    * */
+    public void setScheduleData(String str){
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SCHEDULEDATAINFO, str);
+        editor.apply();
+    }
+
+    /*
+    *清除缓存中课表信息
+    * */
+    public void clearScheduleData(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SCHEDULEDATAINFO, "");
+        editor.apply();
+    }
+
 }

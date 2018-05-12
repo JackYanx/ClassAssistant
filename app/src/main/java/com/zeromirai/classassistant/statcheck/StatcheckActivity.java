@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class StatcheckActivity extends Activity implements View.OnClickListener {
+public class StatcheckActivity extends AppCompatActivity implements View.OnClickListener {
 
     private List<String> list;
     private ListAdapter adapter;
@@ -96,8 +96,10 @@ public class StatcheckActivity extends Activity implements View.OnClickListener 
         return super.onOptionsItemSelected(item);
     }
 
-    private String[] data={"Apple","Banana","Orange","Watermelon","Pear","Grape","Pineapple","Strawberry","Cherry","Mango",
-            "Apple","Banana","Orange","Watermelon","Pear","Grape","Pineapple","Strawberry","Cherry","Mango"};
+    private String[] data={"1 唐正一","2 陈煜恒","3 袁木","4 秦海钧","5 周彦飞","6 杨劲寅","7 赵家琪","8 余是廣","9 商上","10 龚俊",
+            "11 李晓杰","12 李嘉伟","13 李军","14 杜崇智","15 吴佳兴","16 李希畅","17 程实","18 李浩铮","19 周泰宇","20 孙健",
+            "21 冯逸楠","22 张翔","23 喻志培","24 周杰","25 吴任伟","26 单家辉","27 郑永昌","28 郭嘉璐",
+            "29 刘琪","30 官宇霞", "31 刘婧伊","32 曾瑾","33 张馨蓉"};
     /**
      * 为列表添加测试数据
      */
