@@ -18,23 +18,22 @@ import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.R;
 import com.zeromirai.classassistant.common.cache.LocalCache;
 import com.zeromirai.classassistant.schedule.JwcLoginActivity;
-import com.zeromirai.classassistant.schedule.ScheduleActivity;
 import com.zeromirai.classassistant.schedule.SearchActivity;
 import com.zeromirai.classassistant.statcheck.StatcheckActivity;
 
 
-public class ScanFragment extends Fragment {
+public class ClassServiceFragment extends Fragment {
     private Context mContext=getActivity();
     private Button bschedule,bstat;
-    public static ScanFragment newInstance(String param1) {
-        ScanFragment fragment = new ScanFragment();
+    public static ClassServiceFragment newInstance(String param1) {
+        ClassServiceFragment fragment = new ClassServiceFragment();
         Bundle args = new Bundle();
         args.putString("agrs1", param1);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ScanFragment() {
+    public ClassServiceFragment() {
 
     }
 

@@ -1,6 +1,5 @@
 package com.zeromirai.classassistant.main;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -15,18 +14,14 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.zeromirai.classassistant.R;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
     private BottomNavigationBar bottomNavigationBar;
     int lastSelectedPosition = 0;
     private String TAG = MainActivity.class.getSimpleName();
     private MyFragment mMyFragment;
-    private ScanFragment mScanFragment;
-    private HomeFragment mHomeFragment;
+    private ClassServiceFragment mClassServiceFragment;
+    private DynamicFragment mDynamicFragment;
 
     //toolbar
     public boolean onCreateOptionsMenu(Menu menu){
@@ -104,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         /** 添加导航按钮 */
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.ic_home, "动态"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_scan, "扫一扫"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_scan, "班务"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_my, "我"))
                 .setFirstSelectedPosition(lastSelectedPosition )
                 .initialise(); //initialise 一定要放在 所有设置的最后一项
@@ -119,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private void setDefaultFragment() {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        mHomeFragment = HomeFragment.newInstance("动态");
-        transaction.replace(R.id.tb, mHomeFragment);
+        mDynamicFragment = DynamicFragment.newInstance("班务");
+        transaction.replace(R.id.tb, mDynamicFragment);
         transaction.commit();
     }
 
@@ -135,17 +130,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         FragmentTransaction transaction = fm.beginTransaction();
         switch (position) {
             case 0:
-                if (mHomeFragment == null) {
-                    mHomeFragment = HomeFragment.newInstance("动态");
+                if (mDynamicFragment == null) {
+                    mDynamicFragment = DynamicFragment.newInstance("动态");
                 }
-                transaction.replace(R.id.tb, mHomeFragment);
+                transaction.replace(R.id.tb, mDynamicFragment);
 //                getSupportActionBar().setTitle(R.string.home_name);
                 break;
             case 1:
-                if (mScanFragment == null) {
-                    mScanFragment = ScanFragment.newInstance("扫一扫");
+                if (mClassServiceFragment == null) {
+                    mClassServiceFragment = ClassServiceFragment.newInstance("班务");
                 }
-                transaction.replace(R.id.tb, mScanFragment);
+                transaction.replace(R.id.tb, mClassServiceFragment);
 //                getSupportActionBar().setTitle(R.string.scan_name);
                 break;
             case 2:

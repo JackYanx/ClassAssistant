@@ -29,26 +29,26 @@ public class SearchActivity extends AppCompatActivity {
 
         //数据源  选第几周
         ArrayList<String> spinners = new ArrayList<>();
-        spinners.add("第一周");
-        spinners.add("第二周");
-        spinners.add("第三周");
-        spinners.add("第四周");
-        spinners.add("第五周");
-        spinners.add("第六周");
-        spinners.add("第七周");
-        spinners.add("第八周");
-        spinners.add("第九周");
-        spinners.add("第十周");
-        spinners.add("第十一周");
-        spinners.add("第十二周");
-        spinners.add("第十三周");
-        spinners.add("第十四周");
-        spinners.add("第十五周");
-        spinners.add("第十六周");
-        spinners.add("第十七周");
-        spinners.add("第十八周");
-        spinners.add("第十九周");
-        spinners.add("第二十周");
+        spinners.add("1");
+        spinners.add("2");
+        spinners.add("3");
+        spinners.add("4");
+        spinners.add("5");
+        spinners.add("6");
+        spinners.add("7");
+        spinners.add("8");
+        spinners.add("9");
+        spinners.add("10");
+        spinners.add("11");
+        spinners.add("12");
+        spinners.add("13");
+        spinners.add("14");
+        spinners.add("15");
+        spinners.add("16");
+        spinners.add("17");
+        spinners.add("18");
+        spinners.add("19");
+        spinners.add("20");
 
         //设置ArrayAdapter内置的item样式-这里是单行显示样式
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinners);
@@ -73,13 +73,13 @@ public class SearchActivity extends AppCompatActivity {
 
         //数据源   星期几
         ArrayList<String> spinners2 = new ArrayList<>();
-        spinners2.add("星期一");
-        spinners2.add("星期二");
-        spinners2.add("星期三");
-        spinners2.add("星期四");
-        spinners2.add("星期五");
-        spinners2.add("星期六");
-        spinners2.add("星期日");
+        spinners2.add("1");
+        spinners2.add("2");
+        spinners2.add("3");
+        spinners2.add("4");
+        spinners2.add("5");
+        spinners2.add("6");
+        spinners2.add("7");
 
         //设置ArrayAdapter内置的item样式-这里是单行显示样式
         final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinners2);
@@ -104,11 +104,11 @@ public class SearchActivity extends AppCompatActivity {
 
         //数据源   第几大节
         ArrayList<String> spinners3 = new ArrayList<>();
-        spinners3.add("第一节");
-        spinners3.add("第二节");
-        spinners3.add("第三节");
-        spinners3.add("第四节");
-        spinners3.add("第五节");
+        spinners3.add("1");
+        spinners3.add("2");
+        spinners3.add("3");
+        spinners3.add("4");
+        spinners3.add("5");
 
         //设置ArrayAdapter内置的item样式-这里是单行显示样式
         final ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinners3);

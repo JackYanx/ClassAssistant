@@ -12,16 +12,16 @@ import android.view.ViewGroup;
 
 import com.zeromirai.classassistant.R;
 
-public class HomeFragment extends Fragment {
-    public static HomeFragment newInstance(String param1) {
-        HomeFragment fragment = new HomeFragment();
+public class DynamicFragment extends Fragment {
+    public static DynamicFragment newInstance(String param1) {
+        DynamicFragment fragment = new DynamicFragment();
         Bundle args = new Bundle();
         args.putString("agrs1", param1);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public HomeFragment() {
+    public DynamicFragment() {
 
     }
 
