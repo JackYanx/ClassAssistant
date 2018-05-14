@@ -267,7 +267,7 @@ public class JwcLoginActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                startActivity(new Intent(JwcLoginActivity.this,ScheduleActivity.class));
+                                startActivity(new Intent(JwcLoginActivity.this,SearchActivity.class));
                                 JwcLoginActivity.this.finish();
                             }
                         })
