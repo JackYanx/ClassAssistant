@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.R;
@@ -27,6 +28,7 @@ public class JwcLoginActivity extends AppCompatActivity {
 
     private EditText editText_sno;
     private EditText editText_password;
+    private TextView textView_goto_search;
     private LinearLayout linearLayout_btn_jwclogin;
     private ProgressDialog waitingDialog;
     private LocalCache localCache;
@@ -44,6 +46,7 @@ public class JwcLoginActivity extends AppCompatActivity {
     private void setView(){
         editText_sno = (EditText) findViewById(R.id.editText_sno);
         editText_password = (EditText) findViewById(R.id.editText_password);
+        textView_goto_search=(TextView)findViewById(R.id.textView_goto_search);
         linearLayout_btn_jwclogin = (LinearLayout) findViewById(R.id.linearLayout_btn_jwclogin);
     }
 
@@ -78,6 +81,12 @@ public class JwcLoginActivity extends AppCompatActivity {
                 }
                 /*在onTouchEvent的Motion.ACTION_DOWN分支如果返回的是false，那么onTouch事件将不会往下面传递下去，如果返回true，那么onTouch事件将会传递下去，从而可以响应Motion.ACTION_UP分支。*/
                 return true;
+            }
+        });
+        textView_goto_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(JwcLoginActivity.this,SearchActivity.class));
             }
         });
     }

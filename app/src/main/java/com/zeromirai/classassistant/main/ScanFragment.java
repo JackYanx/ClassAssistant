@@ -19,6 +19,7 @@ import com.zeromirai.classassistant.R;
 import com.zeromirai.classassistant.common.cache.LocalCache;
 import com.zeromirai.classassistant.schedule.JwcLoginActivity;
 import com.zeromirai.classassistant.schedule.ScheduleActivity;
+import com.zeromirai.classassistant.schedule.SearchActivity;
 import com.zeromirai.classassistant.statcheck.StatcheckActivity;
 
 
@@ -71,7 +72,7 @@ public class ScanFragment extends Fragment {
                     Intent intent=new Intent(getActivity(), JwcLoginActivity.class);
                     startActivity(intent);
                 }else{
-                    Intent intent=new Intent(getActivity(), ScheduleActivity.class);
+                    Intent intent=new Intent(getActivity(), SearchActivity.class);
                     startActivity(intent);
                 }
 
