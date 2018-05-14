@@ -16,6 +16,7 @@ import android.widget.Button;
 
 import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.R;
+import com.zeromirai.classassistant.common.cache.LocalCache;
 import com.zeromirai.classassistant.schedule.JwcLoginActivity;
 import com.zeromirai.classassistant.schedule.ScheduleActivity;
 import com.zeromirai.classassistant.statcheck.StatcheckActivity;
@@ -63,8 +64,8 @@ public class ScanFragment extends Fragment {
         bschedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //LocalCache localCache = new LocalCache(getActivity());
-                String s = null;//localCache.getScheduleData();
+                LocalCache localCache = new LocalCache(getActivity());
+                String s = localCache.getScheduleData();
                 if(TextUtils.isEmpty(s) || s.length() < 10){
                     ZRLog.d("schedule_wt","课程数据为空");
                     Intent intent=new Intent(getActivity(), JwcLoginActivity.class);
