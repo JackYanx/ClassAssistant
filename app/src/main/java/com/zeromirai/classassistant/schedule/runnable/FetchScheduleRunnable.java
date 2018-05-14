@@ -44,7 +44,7 @@ public class FetchScheduleRunnable implements Runnable {
 
     @Override
     public void run(){
-        ZRLog.d(TAG,"LoginRunnableStarting");
+        ZRLog.d(TAG,"FetchScheduleRunnableStarting...");
         //此变量记录登录进度
         int processCode = 1;
         try{
@@ -160,6 +160,10 @@ public class FetchScheduleRunnable implements Runnable {
             LocalCache localCache = new LocalCache(mContext);
             localCache.clearScheduleData();
             localCache.setScheduleData(jsonArray.toString());
+            localCache.clearSnoNumber();
+            localCache.setSnoNumber(sno);
+            localCache.clearSnoPassword();
+            localCache.setSnoPassword(password);
             processCode = 19;
 
             /*缓存完成后将课表发送至服务器,方便班委查阅*/
@@ -167,11 +171,13 @@ public class FetchScheduleRunnable implements Runnable {
             processCode = 20;
 
             processCode = 0;
+            ZRLog.d(TAG,"FetchScheduleSuccessfully");
+            ZRLog.d(TAG,"Schedule Contents \n"+jsonArray);
         }catch (Exception e){
             ZRLog.d(TAG, Config.ERRMSG[processCode] + e.getMessage());
         }finally {
             sendMessage(processCode,Config.ERRMSG[processCode]);
-            ZRLog.d(TAG,"FetchScheduleRunnable");
+            ZRLog.d(TAG,"FetchScheduleRunnableFinished...");
         }
     }
 

@@ -1,25 +1,25 @@
 package com.zeromirai.classassistant.schedule;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.R;
-import com.zeromirai.classassistant.authentication.JwcLoginActivity;
-import com.zeromirai.classassistant.main.MainActivity;
+import com.zeromirai.classassistant.common.cache.LocalCache;
 import com.zeromirai.classassistant.schedule.runnable.FetchScheduleRunnable;
 
 import java.lang.ref.WeakReference;
-
 
 public class JwcLoginActivity extends AppCompatActivity {
 
@@ -28,48 +28,49 @@ public class JwcLoginActivity extends AppCompatActivity {
     private EditText editText_sno;
     private EditText editText_password;
     private LinearLayout linearLayout_btn_jwclogin;
+    private ProgressDialog waitingDialog;
+    private LocalCache localCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jwc_login);
+        localCache = new LocalCache(this);
+        setView();
+        setListeners();
+        setCacheText();
     }
 
     private void setView(){
         editText_sno = (EditText) findViewById(R.id.editText_sno);
         editText_password = (EditText) findViewById(R.id.editText_password);
+        linearLayout_btn_jwclogin = (LinearLayout) findViewById(R.id.linearLayout_btn_jwclogin);
     }
 
     private void setListeners(){
         linearLayout_btn_jwclogin.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                ZRLog.d(TAG,"btn_jwclogin onTouch()");
                 switch (event.getAction()){
                     case MotionEvent.ACTION_DOWN:{
+                        ZRLog.d(TAG,"btn_jwclogin ACT DOWN");
                         linearLayout_btn_jwclogin.setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_button_login_pressed));
                         break;
                     }
                     case MotionEvent.ACTION_UP:{
+                        ZRLog.d(TAG,"btn_jwclogin ACT UP");
                         linearLayout_btn_jwclogin.setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_button_login));
+                        setViewDisabled();
+                        showWaitingDialog();
 
-                        startActivity(new Intent(JwcLoginActivity.this,MainActivity.class));
-
-                        JwcLoginActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //LoginFragment.this.setViewDisabled();
-                                Toast.makeText(JwcLoginActivity.this,"setViewDisabled",Toast.LENGTH_LONG);
-                                ZRLog.d(TAG,"setViewDisabled");
-                            }
-                        });
                         String[] args = new String[] {
                                 editText_sno.getText().toString(),
                                 editText_password.getText().toString(),
                                 "",
                                 ""
                         };
-                        new Thread(new FetchScheduleRunnable(JwcLoginActivity.this,,args)).start();
-                        //showWaitingDialog();
+                        new Thread(new FetchScheduleRunnable(JwcLoginActivity.this,mHandler,args)).start();
 
                         break;
                     }
@@ -92,139 +93,191 @@ public class JwcLoginActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             Activity activity = this.jwcLoginActivity.get();
             if (activity == null) return;
+            //ZRLog.d(TAG,"888");
             /*登录*/
-            if(fragmentStatus == 0 && loginFragment != null){
-                switch (msg.what){
-                    case 0:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 1:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 2:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 3:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 4:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 5:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 6:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 7:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 8:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 9:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    case 10:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
-                    default:{
-                        loginFragment.dismissWaitingDialog();
-                        loginFragment.setViewEnabled();
-                        break;
-                    }
+            switch (msg.what){
+                case 0:{
+                    JwcLoginActivity.this.dismissWaitingDialog();
+                    JwcLoginActivity.this.setViewEnabled();
+                    showSuccessDialog((String) msg.obj + "\n" + localCache.getScheduleData());
+                    break;
                 }
-            }
-            /*注册*/
-            else if(fragmentStatus == 1 && registerFragment != null){
-                switch (msg.what){
-                    case 0:{
-
-                        break;
-                    }
-                    case 1:{
-
-                        break;
-                    }
-                    case 2:{
-
-                        break;
-                    }
-                    case 3:{
-
-                        break;
-                    }
-                    case 4:{
-
-                        break;
-                    }
-                    case 5:{
-
-                        break;
-                    }
-                    case 6:{
-
-                        break;
-                    }
-                    case 7:{
-
-                        break;
-                    }
-                    case 8:{
-
-                        break;
-                    }
-                    case 9:{
-
-                        break;
-                    }
-                    case 10:{
-
-                        break;
-                    }
-                    case 11:{
-
-                        break;
-                    }
-                    case 12:{
-
-                        break;
-                    }
-                    default:{
-
-                        break;
-                    }
+                case 1:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
                 }
-            }
-            /*其他*/
-            else{
-                ZRLog.d(TAG, "ERROR STATUS");
-                throw new RuntimeException(Config.ERRMSG_XXX);
+                case 2:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 3:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 4:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 5:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 6:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 7:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 8:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 9:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 10:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 11:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 12:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 13:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 14:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 15:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 16:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 17:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 18:{
+//                    JwcLoginActivity.this.dismissWaitingDialog();
+//                    JwcLoginActivity.this.setViewEnabled();
+//                    break;
+                }
+                case 19:{
+                    JwcLoginActivity.this.dismissWaitingDialog();
+                    JwcLoginActivity.this.setViewEnabled();
+                    showErrorDialog((String) msg.obj);
+                    break;
+                }
+                default:{
+                    JwcLoginActivity.this.dismissWaitingDialog();
+                    JwcLoginActivity.this.setViewEnabled();
+                    break;
+                }
             }
 
         }
+    }
+
+    public void setViewDisabled(){
+        editText_sno.setEnabled(false);
+        editText_password.setEnabled(false);
+        linearLayout_btn_jwclogin.setEnabled(false);
+        editText_sno.setTextColor(getResources().getColor(R.color.colorEditTextDisabled));
+        editText_password.setTextColor(getResources().getColor(R.color.colorEditTextDisabled));
+    }
+
+    public void setViewEnabled(){
+        editText_sno.setEnabled(true);
+        editText_password.setEnabled(true);
+        linearLayout_btn_jwclogin.setEnabled(true);
+        editText_sno.setTextColor(getResources().getColor(R.color.colorEditTextEnabled));
+        editText_password.setTextColor(getResources().getColor(R.color.colorEditTextEnabled));
+    }
+
+    public void showWaitingDialog() {
+        if(waitingDialog != null && waitingDialog.isShowing()){
+            ZRLog.d(TAG,"showWaitingDialog() : waitingDialog is showing");
+            return;
+        }
+        waitingDialog= new ProgressDialog(JwcLoginActivity.this);
+        waitingDialog.setTitle("登录中");
+        waitingDialog.setMessage("等待中...");
+        waitingDialog.setIndeterminate(true);
+        waitingDialog.setCancelable(false);
+        waitingDialog.show();
+    }
+
+    public void dismissWaitingDialog() {
+        if(waitingDialog != null){
+            if(waitingDialog.isShowing()) {
+                waitingDialog.dismiss();
+                return;
+            }
+            ZRLog.d(TAG,"dismissWaitingDialog() : waitingDialog is not showing");
+            return;
+        }
+        ZRLog.d(TAG,"waitingDialog NullPointer");
+    }
+
+    private void showErrorDialog(String msg){
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("出错")
+                .setMessage(msg)
+                //.setPositiveButton("确定",null)
+                .setNegativeButton("确定",null)
+                .create();
+        dialog.show();
+    }
+
+    private void showSuccessDialog(String msg){
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("成功")
+                .setMessage(msg)
+                .setPositiveButton("进入课表界面",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(JwcLoginActivity.this,ScheduleActivity.class));
+                                JwcLoginActivity.this.finish();
+                            }
+                        })
+                .create();
+        dialog.show();
+    }
+
+    private void setCacheText(){
+        editText_sno.setText(localCache.getSnoNumber());
+        editText_password.setText(localCache.getSnoPassword());
     }
 
 

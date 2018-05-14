@@ -5,39 +5,24 @@ package com.zeromirai.classassistant.main;
  */
 
 import android.app.Fragment;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.zeromirai.android.util.ZRLog;
 import com.zeromirai.classassistant.R;
+import com.zeromirai.classassistant.schedule.JwcLoginActivity;
 import com.zeromirai.classassistant.schedule.ScheduleActivity;
 import com.zeromirai.classassistant.statcheck.StatcheckActivity;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import static android.app.Activity.RESULT_OK;
-
 
 public class ScanFragment extends Fragment {
-    private Context mContext=null;
+    private Context mContext=getActivity();
     private Button bschedule,bstat;
     public static ScanFragment newInstance(String param1) {
         ScanFragment fragment = new ScanFragment();
@@ -78,8 +63,17 @@ public class ScanFragment extends Fragment {
         bschedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), ScheduleActivity.class);
-                startActivity(intent);
+                //LocalCache localCache = new LocalCache(getActivity());
+                String s = null;//localCache.getScheduleData();
+                if(TextUtils.isEmpty(s) || s.length() < 10){
+                    ZRLog.d("schedule_wt","课程数据为空");
+                    Intent intent=new Intent(getActivity(), JwcLoginActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent=new Intent(getActivity(), ScheduleActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 

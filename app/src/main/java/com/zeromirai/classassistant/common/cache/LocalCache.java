@@ -2,6 +2,7 @@ package com.zeromirai.classassistant.common.cache;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -21,6 +22,8 @@ public class LocalCache extends AbstractCache {
 
     public static final String USERDATAINFO = "USERDATAINFO";
     public static final String SCHEDULEDATAINFO = "SCHEDULEDATAINFO";
+    public static final String SNONUMBERINFO = "SNONUMBERINFO";
+    public static final String SNOPASSWORD = "SNOPASSWORDINFO";
 
     /*
     * 构造函数,传入Context
@@ -127,6 +130,71 @@ public class LocalCache extends AbstractCache {
     public void clearScheduleData(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(SCHEDULEDATAINFO, "");
+        editor.apply();
+    }
+
+    /*
+    * 从缓存中获取教务处帐号信息
+    */
+    @NonNull
+    public String getSnoNumber(){
+        String str = sharedPreferences.getString(SNONUMBERINFO, "");
+        if(TextUtils.isEmpty(str)) {
+            return "";
+        }
+        return str;
+    }
+
+    /*
+    * 更新缓存中教务处帐号信息
+    * */
+    public void setSnoNumber(String str){
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SNONUMBERINFO, str);
+        editor.apply();
+    }
+
+    /*
+    *清除缓存中教务处帐号信息
+    * */
+    public void clearSnoNumber(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SNONUMBERINFO, "");
+        editor.apply();
+    }
+
+    /*
+    * 从缓存中获取教务处密码信息
+    */
+    @NonNull
+    public String getSnoPassword(){
+        String str = sharedPreferences.getString(SNOPASSWORD, "");
+        if(TextUtils.isEmpty(str)) {
+            return "";
+        }
+        return str;
+    }
+    /*
+    * 更新缓存中教务处密码信息
+    * */
+    public void setSnoPassword(String str){
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SNOPASSWORD, str);
+        editor.apply();
+    }
+
+    /*
+    *清除缓存中教务处密码信息
+    * */
+    public void clearSnoPassword(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SNOPASSWORD, "");
         editor.apply();
     }
 
